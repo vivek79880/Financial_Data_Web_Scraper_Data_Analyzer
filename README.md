@@ -1,4 +1,4 @@
-# Financial_Data_Web_SCraper_Data_Analyzer
+# Financial_Data_Web_Scraper_Data_Analyzer
 
 Financial Data Web Scraper & Analyzer:
 This project is a simple financial data scraper and analyzer that fetches stock data, does some basic analysis, and saves it in a CSV file. It pulls data from Yahoo Finance and uses Python libraries like yfinance, requests, BeautifulSoup, pandas, and matplotlib to get, process, and visualize the data.
@@ -57,4 +57,4 @@ Date,Open,High,Low,Close,Adj Close,Volume
 2020-01-03,296.050018,298.279999,294.75,297.429993,297.429993,36586700
 ...
 
-if you feel that something can be improved in this project, feel free to create a pull request.
+if you feel that something can be improved in this project, feel free to create a pull request:)
