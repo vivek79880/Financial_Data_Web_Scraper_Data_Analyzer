@@ -1,10 +1,11 @@
+#first we will import necessary modules and libraries
 import requests
 import pandas as pd
 import yfinance as yf
 import matplotlib.pyplot as plt
 from bs4 import BeautifulSoup
 
-# Function to scrape financial data from a webpage
+# by this Function we can scrap data from yahoo finance webpage
 def scrape_yahoo_finance(stock_symbol):
     url = f"https://finance.yahoo.com/quote/{stock_symbol}"
     headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36'}
@@ -16,13 +17,13 @@ def scrape_yahoo_finance(stock_symbol):
     
     soup = BeautifulSoup(response.text, 'html.parser')
     
-    # Extract the current stock price
+    # below is the soup object which will extract the current stock price
     price = soup.find('fin-streamer', {'data-field': 'regularMarketPrice'}).text
     print(f"Current Price of {stock_symbol}: {price}")
     
     return price
 
-# Function to download stock data using Yahoo Finance API (yfinance)
+# below is the function which will required to download stock data using Yahoo Finance API (yfinance)
 def get_stock_data(stock_symbol, start_date='2020-01-01', end_date='2025-01-01'):
     stock_data = yf.download(stock_symbol, start=start_date, end=end_date)
     print(f"Data for {stock_symbol} from {start_date} to {end_date}:")
@@ -37,11 +38,11 @@ def get_stock_data(stock_symbol, start_date='2020-01-01', end_date='2025-01-01')
 
 # Function to perform basic analysis on stock data
 def analyze_stock_data(stock_data):
-    # Calculate moving averages
+    # Calculate moving averages(moving averages are basically the average of the prices which are fluctuating for a specific period of time and moving term is used because the price constanly changes according to the latest prices.)
     stock_data['SMA_50'] = stock_data['Close'].rolling(window=50).mean()
     stock_data['SMA_200'] = stock_data['Close'].rolling(window=200).mean()
     
-    # Plotting the stock data with moving averages
+    # now will plot the stock data with moving averages
     plt.figure(figsize=(10, 6))
     plt.plot(stock_data['Close'], label='Stock Price', color='blue')
     plt.plot(stock_data['SMA_50'], label='50-Day SMA', color='red')
@@ -53,18 +54,18 @@ def analyze_stock_data(stock_data):
     plt.grid()
     plt.show()
 
-# Main function to run the scraper and analyzer
+# this is the main function which will the scraper and analyzer
 def main():
-    # User input for stock symbol
+    # User input for stock symbol(user can write any of the stock name by writing the symbols like AAPL, MSFT, TSLA)
     stock_symbol = input("Enter the stock symbol (e.g., AAPL, MSFT, TSLA): ").upper()
 
     # Scrape Yahoo Finance for the latest price
     price = scrape_yahoo_finance(stock_symbol)
     
-    # Get historical stock data from Yahoo Finance
+    # from the below code we can scrap the historical stock data from Yahoo Finance
     stock_data = get_stock_data(stock_symbol)
     
-    # Analyze stock data by plotting moving averages
+    # below code will analyze stock data by plotting moving averages
     analyze_stock_data(stock_data)
 
 if __name__ == "__main__":
